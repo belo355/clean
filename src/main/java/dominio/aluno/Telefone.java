@@ -1,4 +1,4 @@
-package model;
+package dominio.aluno;
 
 public class Telefone {
 

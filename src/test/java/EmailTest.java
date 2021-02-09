@@ -1,5 +1,5 @@
 
-import model.Email;
+import dominio.aluno.Email;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

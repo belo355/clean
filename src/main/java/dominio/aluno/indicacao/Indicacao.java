@@ -1,4 +1,6 @@
-package model;
+package dominio.aluno.indicacao;
+
+import dominio.aluno.Aluno;
 
 import java.time.LocalDateTime;
 

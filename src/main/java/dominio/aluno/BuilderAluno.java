@@ -1,8 +1,4 @@
-package model.factory;
-
-import model.Aluno;
-import model.Cpf;
-import model.Email;
+package dominio.aluno;
 
 public class BuilderAluno {
 
