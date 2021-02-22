@@ -5,7 +5,7 @@ public class BuilderAluno {
     private Aluno aluno;
 
     public BuilderAluno comNomeCPFEmail(String nome, String cpf, String email){
-        this.aluno = new Aluno(new Cpf(cpf), nome, new Email(email));
+        this.aluno = new Aluno(new Cpf(cpf), nome, email);
         return this;
     }
 

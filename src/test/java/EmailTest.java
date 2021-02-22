@@ -15,7 +15,6 @@ public class EmailTest {
 
     @Test
     void criarEmailComSucesso() {
-        //todo: pendente finalizar
     }
 
 }

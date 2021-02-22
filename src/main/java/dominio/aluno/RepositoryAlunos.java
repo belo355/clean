@@ -7,7 +7,7 @@ public interface RepositoryAlunos {
 
     void matricular(Aluno aluno) throws SQLException;
 
-    Aluno findByCPF(Cpf cpf);
+    Aluno findByCPF(Cpf cpf) throws SQLException;
 
     List<Aluno> alunosMatriculados();
 

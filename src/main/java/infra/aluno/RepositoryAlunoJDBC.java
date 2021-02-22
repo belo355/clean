@@ -1,10 +1,6 @@
 package infra.aluno;
 
-import dominio.aluno.Aluno;
-import dominio.aluno.Cpf;
-import dominio.aluno.RepositoryAlunos;
-import dominio.aluno.Telefone;
-import sun.plugin2.gluegen.runtime.CPU;
+import dominio.aluno.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +10,7 @@ import java.util.List;
 
 public class RepositoryAlunoJDBC implements RepositoryAlunos {
 
-    private Connection connection;
+    private final Connection connection;
 
     public RepositoryAlunoJDBC(Connection connection) {
         this.connection = connection;
@@ -46,16 +42,35 @@ public class RepositoryAlunoJDBC implements RepositoryAlunos {
     }
 
     @Override
-    public Aluno findByCPF(Cpf cpf) {
+    public Aluno findByCPF(Cpf cpf) throws SQLException {
+        Aluno findAluno = null;
+        String sql = "SELECT * FROM ALUNO WHERE ALUNO.CPF = " + cpf;
+        PreparedStatement ps = connection.prepareStatement(sql);
         try{
-            String sql = "SELECT * FROM ALUNO WHERE ALUNO.CPF = " + cpf;
-            PreparedStatement ps = connection.prepareStatement(sql);
-            //TODO: continuar daq o desenvolvimento do retorno de aluno
-            ps.close();
-            connection.close();
+            ResultSet rs = ps.executeQuery();
+            boolean encontrou = rs.next();
+            if(!encontrou){throw new NaoEncontrouAlunoException(cpf);
+            }
+
+            if(rs.next()){
+                String cpfAluno = rs.getString(1);
+                String nomeAluno = rs.getString(2);
+                String emailAluno = rs.getString(3);
+
+                findAluno.setCpf(cpf);
+                findAluno.setNome(nomeAluno);
+                findAluno.setEmail(emailAluno);
+
+                return findAluno;
+            }
+            return null;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        ps.close();
+        connection.close();
+        return null;
     }
 
     @Override
